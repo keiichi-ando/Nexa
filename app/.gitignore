@@ -1,0 +1,4 @@
+/build
+/src/main/res/raw/
+/src/androidTest/java/com/ex/nexa/Example*.kt
+/src/test/java/com/ex/nexa/Example*.kt
