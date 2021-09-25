@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Nexa</string>
+    <string name="hint_input_master">マスタ</string>
+    <string name="hint_input_target">照合</string>
+    <string name="require_input_master">マスタを入力してください</string>
+    <string name="require_input_target">照合対象を入力してください</string>
+    <string name="require_input_retry">マスタと一致していません</string>
+    <string name="image_compare_match">compare match</string>
+    <string name="image_compare_un_match">compare un match</string>
+</resources>
