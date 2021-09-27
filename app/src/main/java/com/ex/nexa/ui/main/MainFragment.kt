@@ -16,7 +16,7 @@ import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import com.ex.nexa.MainActivity
 import com.ex.nexa.R
-import kotlinx.android.synthetic.main.main_fragment.*
+import com.ex.nexa.databinding.MainFragmentBinding
 import kotlin.properties.Delegates
 
 class MainFragment : Fragment() {
@@ -28,6 +28,9 @@ class MainFragment : Fragment() {
     private val mainActivity: MainActivity
         get() = (activity as MainActivity)
     private lateinit var viewModel: MainViewModel
+    private var _binding: MainFragmentBinding? = null
+    private val binding get() = _binding!!
+
     private val soundPool = SoundPool.Builder().setMaxStreams(2).build()
     private var soundAlert by Delegates.notNull<Int>()
     private lateinit var textView: TextView
@@ -45,7 +48,14 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
+        _binding = MainFragmentBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,11 +64,11 @@ class MainFragment : Fragment() {
         setBackKeyEvent()
         observeViewModel()
 
-        textView = text_state
-        editTextMaster = input_master
-        editText = input_target
-        imageMatch = image_match
-        imageUnMatch = image_un_match
+        textView = binding.textState
+        editTextMaster = binding.inputMaster
+        editText = binding.inputTarget
+        imageMatch = binding.imageMatch
+        imageUnMatch = binding.imageUnMatch
         setEditEventListener()
     }
 
@@ -120,6 +130,8 @@ class MainFragment : Fragment() {
                 MainViewModel.WorkState.COMPARE -> onCompare()
                 MainViewModel.WorkState.MATCH -> onMatch()
                 MainViewModel.WorkState.UN_MATCH -> onUnMatchAlert()
+                else -> {
+                }
             }
         })
     }
